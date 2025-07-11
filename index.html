@@ -121,6 +121,23 @@
     // 随机设置滚动速度
     const scrollSeconds = Math.floor(Math.random() * (48 - 38 + 1)) + 18;
     document.documentElement.style.setProperty('--scroll-speed', scrollSeconds + 's');
+    body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: transparent; /* 修改为透明背景 */
+}
+
+.container {
+  width: 360px;
+  margin: 20px auto;
+  overflow: hidden;
+  background-color: transparent; /* 透明容器 */
+  border-radius: 10px;
+  box-shadow: none; /* 取消阴影 */
+}
+.item {
+  background-color: rgb(49, 83, 182); /* 保留单项蓝色背景 */
+}
   </script>
 </body>
 </html>
