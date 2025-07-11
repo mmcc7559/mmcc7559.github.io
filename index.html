@@ -5,25 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>提现记录滚动</title>
   <style>
+    :root {
+      --scroll-speed: 30s; /* 默认值，稍后 JS 会动态设置 */
+    }
+
     body {
       margin: 0;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: rgb(16, 23, 45);
+      background-color: transparent; /* 修改为透明背景 */
     }
+
     .container {
       width: 360px;
       margin: 20px auto;
       overflow: hidden;
-      background-color: rgb(16, 23, 45);
+      background-color: transparent; /* 透明容器 */
       border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      box-shadow: none; /* 取消阴影 */
     }
+
     .list {
       display: flex;
       flex-direction: column;
       animation: scroll linear infinite;
       animation-duration: var(--scroll-speed);
     }
+
     .item {
       display: flex;
       align-items: center;
@@ -33,10 +40,12 @@
       background-color: rgb(49, 83, 182);
       border-radius: 8px;
     }
+
     .left {
       display: flex;
       align-items: center;
     }
+
     .avatar {
       width: 38px;
       height: 38px;
@@ -44,24 +53,29 @@
       margin-right: 12px;
       object-fit: cover;
     }
+
     .info {
       display: flex;
       flex-direction: column;
     }
+
     .name {
       font-size: 15px;
       color: #ffffff;
     }
+
     .time {
       font-size: 12px;
       color: #cccccc;
       margin-top: 2px;
     }
+
     .amount {
       font-size: 16px;
       color: #ffffff;
       font-weight: bold;
     }
+
     @keyframes scroll {
       0% { transform: translateY(0); }
       100% { transform: translateY(-50%); }
@@ -74,17 +88,18 @@
   </div>
 
   <script>
-    // 中文随机名生成器（2-3个字）
+    // 随机中文名字生成器（2-3个字）
     function getRandomName() {
       const chars = '赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗';
-      const length = Math.random() < 0.5 ? 2 : 3;
+      const len = Math.random() < 0.5 ? 2 : 3;
       let name = '';
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < len; i++) {
         name += chars[Math.floor(Math.random() * chars.length)];
       }
       return name;
     }
 
+    // 随机头像路径（1-50）
     function getRandomAvatar() {
       const index = Math.floor(Math.random() * 50) + 1;
       return `images/${index}.jpeg`;
@@ -110,34 +125,12 @@
     }
 
     const list = document.getElementById('withdrawList');
+    for (let i = 0; i < 50; i++) list.innerHTML += createItem();
+    for (let i = 0; i < 50; i++) list.innerHTML += createItem();
 
-    for (let i = 0; i < 50; i++) {
-      list.innerHTML += createItem();
-    }
-    for (let i = 0; i < 50; i++) {
-      list.innerHTML += createItem();
-    }
-
-    // 随机设置滚动速度
-    const scrollSeconds = Math.floor(Math.random() * (48 - 38 + 1)) + 18;
-    document.documentElement.style.setProperty('--scroll-speed', scrollSeconds + 's');
-    body {
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: transparent; /* 修改为透明背景 */
-}
-
-.container {
-  width: 360px;
-  margin: 20px auto;
-  overflow: hidden;
-  background-color: transparent; /* 透明容器 */
-  border-radius: 10px;
-  box-shadow: none; /* 取消阴影 */
-}
-.item {
-  background-color: rgb(49, 83, 182); /* 保留单项蓝色背景 */
-}
+    // 设置随机滚动速度
+    const speed = Math.floor(Math.random() * (48 - 18 + 1)) + 18;
+    document.documentElement.style.setProperty('--scroll-speed', speed + 's');
   </script>
 </body>
 </html>
