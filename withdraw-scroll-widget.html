@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      background: #0A0A0A;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+    .scroll-box {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
+    .scroll-content {
+      position: absolute;
+      animation: scroll-up 15s linear infinite;
+    }
+    .record {
+      margin-bottom: 16px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .record::before {
+      content: "💰";
+      margin-right: 8px;
+    }
+    @keyframes scroll-up {
+      0% { top: 100%; }
+      100% { top: -100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-box">
+    <div class="scroll-content">
+      <div class="record">Jeffr 提现 ¥750.00 已到账</div>
+      <div class="record">凯文 提现 ¥1,500.00 成功</div>
+      <div class="record">nicotinalina 提现 ¥205.50 VISA</div>
+      <div class="record">晓芸 提现 ¥320.00 PayPal 成功</div>
+      <div class="record">用户005 提现 ¥880.00 VISA 成功</div>
+      <div class="record">用户006 提现 ¥650.00 Stake 成功</div>
+    </div>
+  </div>
+</body>
+</html>
