@@ -21,7 +21,8 @@
     .list {
       display: flex;
       flex-direction: column;
-      animation: scroll 38s linear infinite;
+      animation: scroll linear infinite;
+      animation-duration: var(--scroll-speed);
     }
     .item {
       display: flex;
@@ -41,6 +42,7 @@
       height: 38px;
       border-radius: 50%;
       margin-right: 12px;
+      object-fit: cover;
     }
     .info {
       display: flex;
@@ -72,30 +74,31 @@
   </div>
 
   <script>
-    cconst names = [
-      "李超", "张琳", "刘建国", "陈晓东", "王子怡", "周飞", "黄嘉妍", "许子轩", "赵云飞", "吴若溪",
-      "杨紫", "高原", "唐亦凡", "秦朗", "段如雪", "宋立文", "杜雨涵", "陆嘉航", "冯婧", "丁子豪",
-      "沈婧雅", "邓文静", "侯飞扬", "白彦霖", "蒋晓婉", "阮芷珊", "田志国", "赖伟", "石书瑜", "贺紫凌",
-      "纪泽宇", "栗佳莹", "尹卓凡", "顾天逸", "莫文婷", "滕之凡", "龚浩然", "欧阳晴", "蓝一帆", "汤智",
-      "关梓萌", "柴雨薇", "冉子墨", "文浩铭", "覃翰杰", "毕诗雨", "谢维佳", "尉迟杰", "栾婧怡", "简泽西"
-    ];
+    // 中文随机名生成器（2-3个字）
+    function getRandomName() {
+      const chars = '赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗';
+      const length = Math.random() < 0.5 ? 2 : 3;
+      let name = '';
+      for (let i = 0; i < length; i++) {
+        name += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return name;
+    }
 
-    const avatars = Array.from({ length: 50 }, (_, i) => `./images/${i + 1}.jpeg`);
-
-
-    function getRandomItem(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
+    function getRandomAvatar() {
+      const index = Math.floor(Math.random() * 50) + 1;
+      return `images/${index}.jpeg`;
     }
 
     function createItem() {
-      const name = getRandomItem(names);
-      const avatar = getRandomItem(avatars);
-      const amount = (Math.random() * (600 - 30) + 30).toFixed(2);
+      const name = getRandomName();
+      const avatar = getRandomAvatar();
+      const amount = (Math.random() * (5981 - 30) + 30).toFixed(2);
       const time = Math.floor(Math.random() * 60);
       return `
         <div class="item">
           <div class="left">
-            <img class="avatar" src="${avatar}" />
+            <img class="avatar" src="${avatar}" alt="头像" />
             <div class="info">
               <div class="name">${name}</div>
               <div class="time">${time}秒前</div>
@@ -107,13 +110,17 @@
     }
 
     const list = document.getElementById('withdrawList');
+
     for (let i = 0; i < 50; i++) {
       list.innerHTML += createItem();
     }
-    // 复制再展示，使滚动更流畅
     for (let i = 0; i < 50; i++) {
       list.innerHTML += createItem();
     }
+
+    // 随机设置滚动速度
+    const scrollSeconds = Math.floor(Math.random() * (48 - 18 + 1)) + 18;
+    document.documentElement.style.setProperty('--scroll-speed', scrollSeconds + 's');
   </script>
 </body>
 </html>
