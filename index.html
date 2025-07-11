@@ -92,8 +92,8 @@
 
     function createItem() {
       const name = getRandomName();
-      const avatars = Array.from({ length: 50 }, (_, i) => `images/${i + 1}.jpeg`);
-      const amount = (Math.random() * (5981 - 30) + 30).toFixed(2);
+      const avatar = getRandomAvatar();
+      const amount = (Math.random() * (600 - 30) + 30).toFixed(2);
       const time = Math.floor(Math.random() * 60);
       return `
         <div class="item">
